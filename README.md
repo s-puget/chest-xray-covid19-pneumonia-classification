@@ -1,37 +1,42 @@
-# Chest X-Ray Classification for COVID-19 and Pneumonia Detection
+# Chest X-Ray Classification: COVID-19 & Pneumonia Detection
 
 ## Overview
-This project aims to classify chest X-ray images into three categories: 
-1. **Normal**
-2. **COVID-19**
-3. **Pneumonia** 
 
-The classification model is built using Convolutional Neural Networks (CNN) in TensorFlow and Keras. The dataset used is the **Chest X-ray Images (COVID-19)** dataset, which consists of labeled chest X-ray images from patients diagnosed with COVID-19, pneumonia, and healthy individuals.
-
-The main objective is to create a model that can distinguish between these three classes based on chest X-ray images.
+This project implements **Deep Learning** to classify chest X-ray images into three categories: **Normal, COVID-19, and Pneumonia**. We first train a **CNN from scratch** and then improve performance using **Transfer Learning with VGG16**.
 
 ## Dataset
-The dataset used for training and testing is publicly available and can be accessed [here](https://www.kaggle.com/datasets/prashant268/chest-xray-covid19-pneumonia). It consists of images placed in the following folders:
-- **train/**: Contains training images
-- **test/**: Contains testing images
 
-The images are categorized into subdirectories: **NORMAL**, **COVID19**, and **PNEUMONIA**.
+The dataset is sourced from Kaggle:  
+[Chest X-Ray: COVID-19 & Pneumonia](https://www.kaggle.com/datasets/prashant268/chest-xray-covid19-pneumonia)  
 
-## Code Walkthrough
-### 1. Dataset Summary
-The code first walks through the dataset and provides a summary of the directories and image counts.
+It contains X-ray images labeled as:
+- **NORMAL** (Healthy lungs)
+- **COVID19** (Lungs affected by COVID-19)
+- **PNEUMONIA** (Lungs affected by other pneumonia types)
 
-### 2. Image Preprocessing
-The image paths are obtained, and labels are generated based on the directory names (NORMAL, COVID19, PNEUMONIA). The images are then converted into a DataFrame for further processing.
+## Models Implemented
 
-### 3. Data Augmentation
-Using Keras' `ImageDataGenerator`, data augmentation techniques are applied to the training images to improve model generalization.
+### 1. CNN (Trained from Scratch)
+- **Architecture**: 3 convolutional layers, max pooling, dense layers.
+- **Test Accuracy**: **92.3%**
+- **Limitations**: Longer training time, potential overfitting.
 
-### 4. CNN Model
-A simple Convolutional Neural Network (CNN) is built using Keras. The model consists of three convolutional layers followed by max-pooling layers. The model is compiled with the Adam optimizer and categorical crossentropy loss function.
+### 2. Transfer Learning (VGG16)
+- **Pre-trained VGG16** model used for feature extraction.
+- **Custom classifier** added on top with dense layers.
+- **Test Accuracy**: **94.5%**
+  
+## Results & Comparison
 
-### 5. Model Training
-The model is trained for 10 epochs on the training data and evaluated on the test data. The test accuracy score achieved by the model is **0.845**.
+| Model        | Epochs | Test Accuracy |
+|-------------|--------------|--------------|
+| CNN (Scratch) | 10       | 92.3%       |
+| VGG16 (Transfer Learning) | 5 | 94.5% |
 
-## Results
-The model achieved a test accuracy score of **0.845** after training for 10 epochs, which shows that the model is able to classify the chest X-rays into the three categories with reasonable performance.
+### Visualizations:
+- **Accuracy & Loss Plots**: To track model performance.
+- **Confusion Matrix**: To evaluate misclassifications.
+
+## References
+
+- Kaggle Dataset: [Chest X-Ray: COVID-19 & Pneumonia](https://www.kaggle.com/datasets/prashant268/chest-xray-covid19-pneumonia)
